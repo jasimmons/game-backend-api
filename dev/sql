@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -euo pipefail
+
+DEV_DIR="${DEV_DIR:-}"
+if [ -z "${DEV_DIR}" ]; then
+  DEV_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+fi
+
+exec docker-compose -p dev-game -f "${DEV_DIR}/docker-compose.yml" exec mysql mysql dev
